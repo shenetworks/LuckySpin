@@ -1,26 +1,28 @@
 
 #include <stdio.h> 
 #include <stdlib.h>
-// to compile use gcc luckyspin.c -o luckySpin
-// Maybe use float and double for the buffer overflow portion
+#include <time.h>
+// Expected result: buffer overflow should allow the attacker to get the unlimited food code
 // 3 spins per day allowed unless you get a free spin
 int main() {
     
-    
+    srand(time(0));
     int numberOfSpins = 0;
 
-    printf("Welcome to Happy Eater\n");
+    printf("Welcome to Lucky Spin\n");
     printf("You get 3 chances per day to win yummy prizes\n");
     
+    
     while (numberOfSpins < 3 ) {
-        int startSpin = 0;
-        printf("Would you like to take a spin?\n");
+        char startSpin[10];
         printf("Number of spins used: %i/3 \n", numberOfSpins );
-        printf("Yes(1)/No(2):");
-        scanf("%d", &startSpin);
+        printf("Would you like to take a spin?\n");
+        printf("1 - Yes / 2 - No:\n");
+        scanf("%s", startSpin);
+        int spins; spins = atoi(startSpin); 
         int spinNumber = rand() % 30;
-   
-        if (startSpin == 1) {
+
+        if (spins == 1) {
             numberOfSpins++;
             switch (spinNumber) {
                 case 1:
@@ -48,22 +50,28 @@ int main() {
                     printf("You won 1 (one) free medium sized drink\n");
                     break;
                 case 9:           
-                    printf("CONGRATS! You wont the jackpot! Unlimited food for life! Use code X72FG4S\n");
+                    printf("CONGRATS! You won the jackpot! Unlimited food for life! Use code X72FG4S\n");
                     break;
                 case 10:
                     numberOfSpins -= 1; // code for free spin
                     printf("You won a free spin!\n"); 
                     break;
                 default:
-                    printf("Not a winner this time, better luck next time!\n");
+                    printf("Not a winner, better luck next time!\n");
             }
-        } else if (startSpin == 2) {
-            printf("Come back later when you want to spin\n"); 
+        } else if (spins == 2) {
+            printf("Come back later when you want to spin\n");
+            continue; 
         } else {
             printf("Invalid Entry\n");
+            break;
         }
     }    
     if (numberOfSpins >= 3) {
         printf("You are out of spins, come back tomorrow to try again\n");
-    }  
+        printf("Today's Winnings:\n");
+
+    }  else {
+        printf("Invalid Entry");
+    }
 }
