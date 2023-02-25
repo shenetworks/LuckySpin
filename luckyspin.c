@@ -1,4 +1,3 @@
-
 #include <stdio.h> 
 #include <stdlib.h>
 #include <time.h>
@@ -13,7 +12,8 @@ int main() {
     printf("You get 3 chances per day to win yummy prizes\n");
     
     
-    while (numberOfSpins < 3 ) {
+    while (numberOfSpins != 3 ) {
+
         char startSpin[10];
         printf("Number of spins used: %i/3 \n", numberOfSpins );
         printf("Would you like to take a spin?\n");
@@ -21,6 +21,8 @@ int main() {
         scanf("%s", startSpin);
         int spins; spins = atoi(startSpin); 
         int spinNumber = rand() % 30;
+        // printf("startSpin:%p\n", startSpin );
+        // printf("numberOfSpins:%p\n", &numberOfSpins);
 
         if (spins == 1) {
             numberOfSpins++;
@@ -64,12 +66,11 @@ int main() {
             continue; 
         } else {
             printf("Invalid Entry\n");
-            break;
         }
     }    
     if (numberOfSpins >= 3) {
         printf("You are out of spins, come back tomorrow to try again\n");
-        printf("Today's Winnings:\n");
+        // printf("Number of spins used: %i/3 \n", numberOfSpins );
 
     }  else {
         printf("Invalid Entry");
