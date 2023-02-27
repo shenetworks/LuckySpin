@@ -12,9 +12,9 @@ int main() {
     printf("You get 3 chances per day to win yummy prizes\n");
     
     
-    while (numberOfSpins != 3 ) {
+    while (numberOfSpins < 3 ) {
 
-        char startSpin[10];
+        char startSpin[2];
         printf("Number of spins used: %i/3 \n", numberOfSpins );
         printf("Would you like to take a spin?\n");
         printf("1 - Yes / 2 - No:\n");
